@@ -7,6 +7,8 @@
 
 
 include 'secure.php';
+include '../config/config_main.php';
+include '../scripts/distros/' . $DISTRO . '.php';
 include '../scripts/version.php';
 include '../config/memory.php';
 include '../config/config_invt1.php';
@@ -72,7 +74,7 @@ echo "
 </td></tr>
 <tr><td valign='top'><b>Checking PHP :</b><br>
 ";
-echo "PHP version:  <a href='phpinfo.php'>" . phpversion() . "</a><br>";
+echo "PHP version: <a href='phpinfo.php'>" . phpversion() . '</a><br>';
 $input = '{ "jsontest" : " <br>Json extension loaded" }';
 $val   = json_decode($input, true);
 if ($val["jsontest"] != "") {
@@ -90,6 +92,9 @@ if (!extension_loaded('curl')) {
 } else {
 	echo "<img src='../images/24/sign-check.png' width=24 height=24 border=0> Curl extension loaded ";
 }
+echo "<br><br><b>Since PHP 7.4 there is hardening options</b><br>
+Allow to use your com. devices by setting PrivateDevices=false in php-fpm.service. (e.g. 'systemctl edit --full php-fpm.service')
+<br> After change you need to restart php and your webserver. (e.g. 'systemctl restart php-fpm' and 'systemctl restart nginx') and reboot.";
 $ndday = date($DATEFORMAT . " H:i:s", $nowUTC);
 echo "<br><br>You timezone is set to $DTZ ($ndday)";
 if (ini_get('open_basedir')) {
@@ -120,6 +125,8 @@ echo "<br><br>Some distros have 755 by default, some application need to write p
 </td></tr>
 <tr><td valign='top'><b>Files permissions :</b> <a href='fperms.php'>$CURDIR files should be owned by $whoami user</a>
 </td></tr>
+<tr><td valign='top'><b>Files checker tool :</b> <a href='fsyntax.php'>fsyntax</a>
+</td></tr>
 <tr><td valign='top'><b>Hardware and communication apps. rights :</b><br>
 <br><b>Grant the permission to execute your com. apps.</b> Locate them with 'whereis mycomapp' and 'chmod a+x /pathto/mycomapp.py'.<br>
 <br><b>Allow the access the communication ports as ";
@@ -127,19 +134,14 @@ $whoami = exec('whoami');
 echo "$whoami user</b>. $whoami currently belong to those groups: ";
 $datareturn = exec("groups $whoami");
 echo "$datareturn
-<br>The peripherals are usually owned by the uucp or dialout group, check (e.g. 'ls -al /dev/ttyUSB0'), add your user to the group: (e.g. 'usermod -a -G uucp $whoami')<br><br>";
-echo "<b>Since PHP 7.4 there is hardening options</b>.";
-echo ' Current version is ' . PHP_VERSION;
-echo ". Allow to use your com. devices by setting to PrivateDevices=false in php-fpm.service. (e.g. systemctl edit --full php-fpm.service)
-<br>
-<br> After change you need to restart php and your webserver. (e.g. 'systemctl restart php-fpm' and 'systemctl restart nginx') and reboot.
+<br>The peripherals are usually owned by the uucp or dialout group, check (e.g. 'ls -al /dev/ttyUSB0'), add your user to the group: (e.g. 'usermod -a -G uucp $whoami')<br>
 </td>
 </tr>
 <tr><td valign='top'><b>Com. app. reliability :</b> <a href='comtester.php'>Enhanced com. tester</a></td></tr>
 <tr><td><b>Checking running softwares :</b><br>
 <textarea style='resize: none;background-color: #DCDCDC' cols=100 rows=3>
 ";
-$datareturn = shell_exec('ps -ef | egrep -i "123solar|aurora|485solar-get|SMAspot|jfyspot|piko|rklogger|sdm120c" | grep -v grep');
+$datareturn = shell_exec("$PSCMD | egrep -i '123solar|aurora|485solar-get|SMAspot|jfyspot|piko|rklogger|sdm120c' | grep -v grep");
 echo "$datareturn
 </textarea>";
 if ($DEBUG) {

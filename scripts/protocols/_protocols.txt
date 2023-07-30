@@ -2,7 +2,7 @@ yourprotocol.php (This script is called as much as possible)
 ════════════════
 
 $CMD_POOLING The command that request your com. app. You should use the ${'ADR'.$invt_num} variable as inverter adress (IP or RS-485) and ${'COMOPTION'.$invt_num} as parameter options.
-$CMD_RETURN The return string. Always initialize to allow the 'Communication Error' test
+$CMD_RETURN The com app return string. Always initialize to allow the 'Communication Error' test
 
 $IxV, $IxA, $IxP are strings values. Voltage, Amperage and Power. (x range 4)
 $GxV, $GxA, $GxP For grid phase x values (x range 3)

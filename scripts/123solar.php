@@ -133,7 +133,7 @@ while (true) { // To infinity ... and beyond!
 				${'comlost' . $invt_num} = false;
 				logevents($invt_num, "#$invt_num $now\tConnection restored\n\n");
 				if (${'NORESPM' . $invt_num}) {
-					$msg = "$now\r\nConnection restored with inverter\r\n";
+					$msg = "Connection restored with inverter\r\n";
 					file_put_contents($INVTDIR . '/msgqueue/' . $nowUTC . 'LR.txt', $msg);
 				}
 			}
@@ -200,7 +200,7 @@ while (true) { // To infinity ... and beyond!
 					sleep($giveup);
 					$giveup++;
 				}
-				if ($giveup > 2 && $memarray['awake'] && $nowUTC < ($sun_info['sunset'] - 600)) {
+				if ($giveup > 2 && $memarray['awake'] && $nowUTC < ($sun_info['sunset'] - 600) && $nowUTC > ($sun_info['sunrise'] + 600)) {
 					logevents($invt_num, "#$invt_num $now\tMissing 5' sample\n\n");
 				}
 			}
@@ -646,10 +646,12 @@ while (true) { // To infinity ... and beyond!
 
 							for ($i = 0; $i < $cnt; $i++) {
 								$filename = $output[$i];
-								$handle   = fopen($filename, 'r');
-								$contents = fread($handle, filesize($filename));
-								$msg      = $contents . $msg;
-								fclose($handle);
+									if(filesize($filename)) {
+										$handle   = fopen($filename, 'r');
+										$contents = fread($handle, filesize($filename));
+										$msg      = $contents . $msg;
+										fclose($handle);
+									}
 							}
 							$i = 0;
 							while ($i < $cnt) {

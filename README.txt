@@ -3,15 +3,15 @@
  ║                           - 123Solar Web Logger -                           ║
  ║                     PHP/JS Monitoring for Solar Inverters                   ║
  ║                                                                             ║
- ║             Version     : 1.8.4.3                                           ║
+ ║             Version     : 1.8.4.5                                           ║
  ║             Made by     : Louviaux Jean-Marc                                ║
- ║             Last Update : 21/08/20                                          ║
+ ║             Last Update : 14/05/23                                          ║
  ║                                                                             ║
  ╚═════════════════════════════════════════════════════════════════════════════╝
  
  What can 123Solar do for you ? ───────────────────────────────────────────────
 
-  123Solar is a set of PHP/JS files that make a web logger to monitor your photovoltaic inverter(s).
+  123Solar is a set of PHP/JS files that makes a web logger to monitor your photovoltaic inverter(s).
     
  Prerequisites ────────────────────────────────────────────────────────────────
  
@@ -33,7 +33,7 @@
  Support, Update & Contact ────────────────────────────────────────────────────
  
   Check first the 'Help and debugger' section in the administration. It usually respond to most common(s) issue(s).
-  To get support, updates or contact please go to http://www.123solar.org
+  To get support, updates or contact please go to https://github.com/jeanmarc77/123solar/
   
  License & External copyrights ────────────────────────────────────────────────
 

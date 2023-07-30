@@ -473,9 +473,9 @@ for ($i = 1; $i <= $uptostring; $i++) {
 	echo "P);
   gauge$i.setTitle({ text: Highcharts.numberFormat(json.I";
 	echo $j;
-	echo "V,'1') +' VDC  '+ Highcharts.numberFormat(json.I";
+	echo "V,'1') +'V⎓ '+ Highcharts.numberFormat(json.I";
 	echo $j;
-	echo "A,'1') + ' A'});
+	echo "A,'1') + 'A'});
   ";
 }
 
@@ -503,7 +503,7 @@ for ($j = $stri; $j < $upto; $j++) {
 	echo "V);
   gauge$j.setTitle({ text: Highcharts.numberFormat(json.G";
 	echo $ph;
-	echo "V,'1') + ' V'});
+	echo "V,'1') + ' V~'});
   $('#hz$j').html(json.FRQ + 'Hz');";
 	$j++;
 	echo "
@@ -648,7 +648,7 @@ echo "
 <tr>
 <td COLSPAN=2>
 <br>
-$lgEFF <span id='EFF'>--</span>%<br>
+$lgEFF <span id='EFF'>--</span> %<br>
 $lgDBOOSTER $lgDTEMP <span id='BOOT'>--</span> °c<br>
 $lgDINVERTER $lgDTEMP <span id='INVT'>--</span> °c<br>";
 if (${"SR$invtnum"} != 'no') {
